@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "AnalyTica Browsing Behavior Tracker",
+  "version": "1.0",
+  "permissions": [
+    "history",
+    "tabs",
+    "storage",
+    "idle",
+    "activeTab"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content_scroll.js", "content_mouse.js", "content_form.js", "content_load_time.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["lib/chart.min.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}
